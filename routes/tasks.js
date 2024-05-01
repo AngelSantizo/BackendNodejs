@@ -18,11 +18,24 @@ router.post('/addTasks', function(req, res, next){
     //verificaremos aquí si existe el html comprobando body
     if(req.body && req.body.name && req.body.description && req.body.dueDate){
         //aqui agregamos el ID 
-        req.body.id = timeStamp;
+        req.body.id = timeStamp.toString();
         tasks.push(req.body);
         res.json(tasks);
     } else {
         res.status(400).send("Faltan datos obligatorios para crear la tarea.");
+    }
+});
+
+router.delete('/removeTask/:id', function(req, res, next){
+    //verificamos los parametros 
+    if(req.params && req.params.id){
+        let id = req.params.id;
+
+        //eliminaremos aqui 
+        tasks = tasks.filter(task => task.id !== id); //recorrera el arreglo, lo filtrara cada uno y que coincida con el id sera el que se borrara
+        res.json(tasks);
+    }else{
+        res.json([{}])
     }
 });
 
