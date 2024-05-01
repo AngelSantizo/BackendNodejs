@@ -11,4 +11,19 @@ router.get('/getTasks', function(req, res, next){
     res.json(tasks);
 }) //req, parametros para pedir la peicion, res hace referencia a la respuesta  y un next en dado caso usaremos un middleware
 
+router.post('/addTasks', function(req, res, next){
+    //tenemos que verificar cada tarea por un ID
+    let timeStamp = Date.now() + Math.random();
+
+    //verificaremos aquí si existe el html comprobando body
+    if(req.body && req.body.name && req.body.description && req.body.dueDate){
+        //aqui agregamos el ID 
+        req.body.id = timeStamp;
+        tasks.push(req.body);
+        res.json(tasks);
+    } else {
+        res.status(400).send("Faltan datos obligatorios para crear la tarea.");
+    }
+});
+
 module.exports = router;
