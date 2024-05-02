@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //nuestro middleware pasara por todos los endpoints
 router.use((req, res, next)=>{
   //verificaremos que haya un header
-  if(req.headers.authorization && req.headers.authorization === '123456'){
+  if(req.headers.authorization && req.headers.authorization === 'AuthKey123'){
     //si si tiene el header de authorization y tiene 123456 entonces que siga
     next();
   }else{
