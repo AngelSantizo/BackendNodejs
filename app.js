@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//agregando middleware
+const router = express.Router();
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var usersTasks = require('./routes/tasks');
@@ -20,6 +23,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//nuestro middleware pasara por todos los endpoints
+router.use((req, res, next)=>{
+  //verificaremos que haya un header
+  if(req.headers.authorization && req.headers.authorization === '123456'){
+    //si si tiene el header de authorization y tiene 123456 entonces que siga
+    next();
+  }else{
+    res.json({'error': 'no se encontro autorizacion'})
+  }
+});
+
+//tambien le diremos que en todas las rutas use el middleware
+app.use('/', router);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tasks', usersTasks);
