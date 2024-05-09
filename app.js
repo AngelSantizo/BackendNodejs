@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//haremos instancia de cors
+var cors = require('cors')
 
 //agregando middleware
 const router = express.Router();
@@ -35,6 +37,8 @@ router.use((req, res, next)=>{
   }
 });
 
+//aqui usaremos cors en toda la aplicacion
+app.use(cors());
 //tambien le diremos que en todas las rutas use el middleware
 app.use('/', router);
 app.use('/', indexRouter);
