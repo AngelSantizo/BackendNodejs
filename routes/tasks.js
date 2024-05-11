@@ -22,7 +22,8 @@ router.post('/addTasks', function(req, res, next){
         tasks.push(req.body);
         res.json(tasks);
     } else {
-        res.status(400).send("Faltan datos obligatorios para crear la tarea.");
+        //en caso que no cumpla con los 3 parametros de name,des y due date entonces se enviara este error de bad request
+        res.status(400).json({});
     }
 });
 
@@ -35,7 +36,8 @@ router.delete('/removeTask/:id', function(req, res, next){
         tasks = tasks.filter(task => task.id !== id); //recorrera el arreglo, lo filtrara cada uno y que coincida con el id sera el que se borrara
         res.json(tasks);
     }else{
-        res.json([{}])
+        //si no se cumple con los parametros entonces tambien mandaremos un bad request
+        res.status(400).json({});
     }
 });
 

@@ -3,12 +3,12 @@ var express = require('express');
 var router = express.Router();
 
 //necesitaremos donde llevar un lugar de memoria para las metas
-let tasks = [];
+let goals = [];
 
 //accion para obtener todos las metas
 router.get('/getGoals', function(req, res, next){
     //se guardaran JSON dentro del array
-    res.json(tasks);
+    res.json(goals);
 }) 
 
 router.post('/addGoals', function(req, res, next){
@@ -19,8 +19,8 @@ router.post('/addGoals', function(req, res, next){
     if(req.body && req.body.name && req.body.description && req.body.dueDate){
         //aqui agregamos el ID 
         req.body.id = timeStamp.toString();
-        tasks.push(req.body);
-        res.json(tasks);
+        goals.push(req.body);
+        res.json(goals);
     } else {
         res.status(400).send("Faltan datos obligatorios para crear la tarea.");
     }
@@ -32,8 +32,8 @@ router.delete('/removeGoals/:id', function(req, res, next){
         let id = req.params.id;
 
         //eliminaremos aqui 
-        tasks = tasks.filter(task => task.id !== id); //recorrera el arreglo, lo filtrara cada uno y que coincida con el id sera el que se borrara
-        res.json(tasks);
+        goals = goals.filter(goals => goals.id !== id); //recorrera el arreglo, lo filtrara cada uno y que coincida con el id sera el que se borrara
+        res.json(goals);
     }else{
         res.json([{}])
     }

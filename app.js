@@ -33,7 +33,8 @@ router.use((req, res, next)=>{
     //si si tiene el header de authorization y tiene 123456 entonces que siga
     next();
   }else{
-    res.json({'error': 'no se encontro autorizacion'})
+    //si el key esta mal en el header ahora nos mostrara un codigo de error.
+    res.status(401).json({'error': 'no se encontro autorizacion'})
   }
 });
 
