@@ -35,7 +35,7 @@ router.delete('/removeGoals/:id', function(req, res, next){
         goals = goals.filter(goals => goals.id !== id); //recorrera el arreglo, lo filtrara cada uno y que coincida con el id sera el que se borrara
         res.json(goals);
     }else{
-        res.json([{}])
+        res.status(400).send("Faltan datos obligatorios para crear la tarea.");
     }
 });
 
