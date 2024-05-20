@@ -14,6 +14,11 @@ var usersRouter = require('./routes/users');
 var usersTasks = require('./routes/tasks');
 var usersGoals = require('./routes/goals');
 
+//agregando la base de datos
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/desarrolloweb') //hacemos referencia al local host
+
+
 var app = express();
 
 // view engine setup
